@@ -42,7 +42,7 @@ PWD_SanityCheck generate-cad.sh
 
 # Generate Gerbers for each pcb file in the parent directory
 count=0
-for pcbname in `ls .. |sed -n -e '/\.pcb/s/\.pcb$//p'`; do
+for pcbname in `ls ../.. |sed -n -e '/\.pcb/s/\.pcb$//p'`; do
     if [[ ${pcbname: -4} = ".new" ]]; then
         echo "Warning: Assuming $pcbname.pcb is a development artifact, skipping"
         continue
@@ -50,7 +50,7 @@ for pcbname in `ls .. |sed -n -e '/\.pcb/s/\.pcb$//p'`; do
     if [[ ! -e $pcbname ]]; then
 	mkdir $pcbname
     fi
-    pcb -x gerber --all-layers --name-style fixed --gerberfile $pcbname/$pcbname ../$pcbname.pcb
+    pcb -x gerber --all-layers --name-style fixed --gerberfile $pcbname/$pcbname ../../$pcbname.pcb
 	
 	cd $pcbname/
 	
@@ -62,7 +62,7 @@ for pcbname in `ls .. |sed -n -e '/\.pcb/s/\.pcb$//p'`; do
 	convert Render.png -bordercolor white -border 1x1 -alpha set -channel RGBA -fuzz 1% -fill none -floodfill +0+0 white -shave 1x1 Render.png
 	convert Render.png -fuzz 1% -transparent \#cccccc Render.png
 	
-	cd ..
+	cd ../..
 	
 done
 

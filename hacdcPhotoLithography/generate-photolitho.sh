@@ -46,7 +46,7 @@ echo -e '\E[1;32;46m Diff complete, please review. \E[0m'
 
 # Generate Gerbers for each pcb file in the parent directory
 count=0
-for pcbname in `ls .. |sed -n -e '/\.pcb/s/\.pcb$//p'`; do
+for pcbname in `ls ../.. |sed -n -e '/\.pcb/s/\.pcb$//p'`; do
     if [[ ${pcbname: -4} = ".new" ]]; then
         echo "Warning: Assuming $pcbname.pcb is a development artifact, skipping"
         continue
@@ -54,7 +54,7 @@ for pcbname in `ls .. |sed -n -e '/\.pcb/s/\.pcb$//p'`; do
     if [[ ! -e $pcbname ]]; then
 	mkdir $pcbname
     fi
-    pcb -x gerber --all-layers --name-style fixed --gerberfile $pcbname/$pcbname ../$pcbname.pcb
+    pcb -x gerber --all-layers --name-style fixed --gerberfile $pcbname/$pcbname ../../$pcbname.pcb
 	
 	cp OpenSCAM_Config $pcbname/
 	

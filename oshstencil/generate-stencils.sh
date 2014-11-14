@@ -22,6 +22,8 @@
 # OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+# Modified by mirage335 under same license as above.
+
 
 ## generate-gerbers.sh
 ##
@@ -153,10 +155,21 @@ for pcbname in `ls ../.. |sed -n -e '/\.pcb/s/\.pcb$//p'`; do
 done
 
 # Remove Paste files, OSHPark doesn't do stencils
-find . -name \*paste\* -delete
+#find . -name \*paste\* -delete
+
+# Only Paste files, for OSHStencils.
+#find . -maxdepth 2 -type f -regextype posix-egrep -regex ".*(\.gbr|\.cnc).*" ! -regex ".*(paste|outline).*" -delete
+
+# Only TopPaste by default.
+find . -maxdepth 2 -type f -regextype posix-egrep -regex ".*(\.gbr|\.cnc).*" ! -regex ".*(toppaste|outline).*" -delete
+
+# Rename files.
+find . -maxdepth 2 -type f -regextype posix-egrep -regex ".*toppaste.*" -exec mv {} {}.gtp \;
+find . -maxdepth 2 -type f -regextype posix-egrep -regex ".*bottompaste.*" -exec mv {} {}.gbp \;
+find . -maxdepth 2 -type f -regextype posix-egrep -regex ".*outline.*" -exec mv {} {}.gko \;
 
 # Remove empty silk layers
-find . -name \*silk\* -size -380c -delete
+#find . -name \*silk\* -size -380c -delete
 
 # Compress Gerbers
 find . -maxdepth 1 -type d -and -not -name '.' -exec zip -r {} {} \; > /dev/null
