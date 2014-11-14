@@ -19,7 +19,7 @@ _oshpark/stencil_
 Upload these to quickly order high-quality PCBs and solder-paste stencils fabricated by a third-party service cost-effectively.
 
 __Copyrights__
-Scripts are derived from generate-gerbers.sh by Shawn Nock. They and all modifications carry the MIT license copyright.
+Many scripts are derived from generate-gerbers.sh by Shawn Nock. They and all modifications carry the MIT license copyright.
 
 Other files, including this readme, are CC0 (public-domain) licensed.
 
