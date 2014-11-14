@@ -26,18 +26,6 @@
 
 #Derived from generate-gerbers.sh by Shawn Nock. Modified by mirage335, under same copyright as above.
 
-#"$1" = File to check.
-PWD_SanityCheck() {
-	if [[ $(ls -ld ./"$1") ]]
-	then
-		echo -e '\E[1;32;46m Found file '"$1"', proceeding. \E[0m'
-	else
-		echo -e '\E[1;33;41m *DANGER* Did not find file '"$1"'! *DANGER* \E[0m'
-		echo -e '\E[1;33;41m Aborting! \E[0m'
-		exit
-	fi
-}
-
 #$1 = sourceFile
 #$2 = basicName
 genSingleBOM() {
@@ -49,8 +37,6 @@ genSingleBOM() {
 	
 	echo '</table>' >> "$OLDPWD"/"$2"/"$2".html
 }
-
-PWD_SanityCheck generate-bom.sh
 
 # Generate HTML BOM files for each sch file in the parent directory
 count=0

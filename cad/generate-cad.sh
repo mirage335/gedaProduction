@@ -62,7 +62,7 @@ for pcbname in `ls ../.. |sed -n -e '/\.pcb/s/\.pcb$//p'`; do
 	convert Render.png -bordercolor white -border 1x1 -alpha set -channel RGBA -fuzz 1% -fill none -floodfill +0+0 white -shave 1x1 Render.png
 	convert Render.png -fuzz 1% -transparent \#cccccc Render.png
 	
-	cd ../..
+	cd ..
 	
 done
 
