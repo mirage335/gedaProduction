@@ -65,6 +65,4 @@ for schname in `ls ../.. |sed -n -e '/\.sch/s/\.sch$//p'`; do
 	
 done
 
-#find . -maxdepth 2 -regextype posix-egrep -regex ".*(silk|\.cnc|\.gbr|\.eps).*" -delete
-
 echo -e '\E[1;32;46m Finished. \E[0m'

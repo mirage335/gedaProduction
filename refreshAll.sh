@@ -9,7 +9,7 @@
 #Regenerate BOM files.
 echo -en '\E[1;32;46m Regenerating BOMs... \E[0m'
 
-find . -name genBOM.sh -type f -exec bash -c 'cd $(dirname $(realpath {})) ; ./genBOM.sh' \; >& /dev/null
+find . -name generate-bom.sh -type f -exec bash -c 'cd $(dirname $(realpath {})) ; ./generate-bom.sh' \; >& /dev/null
 
 echo -e '\E[1;32;46m done. \E[0m\n'
 
