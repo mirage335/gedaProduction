@@ -6,6 +6,16 @@
 
 #Please don't mess around with the code carelessly, and realize that realpath may have some glitches with symlinks.
 
+if [[ -e $(which realpath) && -e $(which dirname) && -e $(which find) ]]
+then
+	echo -e '\E[1;32;46m Found dependencies, proceeding. \E[0m'
+	echo
+else	
+	echo -e '\E[1;33;41m *DANGER* Did not find dependencies! *DANGER* \E[0m'
+	echo -e '\E[1;33;41m Aborting! \E[0m'
+	exit
+fi
+
 #Regenerate BOM files.
 echo -en '\E[1;32;46m Regenerating BOMs... \E[0m'
 

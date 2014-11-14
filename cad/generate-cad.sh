@@ -66,6 +66,6 @@ for pcbname in `ls ../.. |sed -n -e '/\.pcb/s/\.pcb$//p'`; do
 	
 done
 
-find . -maxdepth 2 -regextype posix-egrep -regex ".*(silk|\.cnc|\.gbr|\.eps).*" -delete
+find . -maxdepth 2 -type f -regextype posix-egrep -regex ".*(silk|\.cnc|\.gbr|\.eps).*" -delete
 
 echo -e '\E[1;32;46m Finished. \E[0m'

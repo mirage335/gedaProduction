@@ -86,6 +86,6 @@ for pcbname in `ls ../.. |sed -n -e '/\.pcb/s/\.pcb$//p'`; do
 done
 
 find . -name drill.ngc -exec sed -i 's/.*S10000.*/&\nM3\nG91.1\nG0 Z0.10000/' {} \;
-find . -maxdepth 2 -regextype posix-egrep -regex ".*(silk|fab\.gbr|plated-drill\.cnc|mask\.gbr|\.png).*" -delete
+find . -maxdepth 2 -type f -regextype posix-egrep -regex ".*(silk|fab\.gbr|plated-drill\.cnc|mask\.gbr|\.png).*" -delete
 
 echo -e '\E[1;32;46m Finished. \E[0m'

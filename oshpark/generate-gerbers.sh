@@ -75,6 +75,22 @@
 ##      internal layers are empty. This is expensive and (most-likely)
 ##      stupid. Remove any unused layers in your design.
 
+#Modified by mirage335, under same copyright as above.
+
+#"$1" = File to check.
+PWD_SanityCheck() {
+	if [[ $(ls -ld ./"$1") ]]
+	then
+		echo -e '\E[1;32;46m Found file '"$1"', proceeding. \E[0m'
+	else
+		echo -e '\E[1;33;41m *DANGER* Did not find file '"$1"'! *DANGER* \E[0m'
+		echo -e '\E[1;33;41m Aborting! \E[0m'
+		exit
+	fi
+}
+
+PWD_SanityCheck generate-gerbers.sh
+
 ## Variables
 MAX_LAYERS=4 # Currently OSHPark maxes out at 4 layer boards, we'll
 	     # emit a warning if this is exceeded
@@ -152,11 +168,13 @@ for pcbname in `ls ../.. |sed -n -e '/\.pcb/s/\.pcb$//p'`; do
     count=0
 done
 
+echo $PWD
+
 # Remove Paste files, OSHPark doesn't do stencils
-find . -name \*paste\* -delete
+find .  -maxdepth 2 -type f -name \*paste\* -delete
 
 # Remove empty silk layers
-find . -name \*silk\* -size -380c -delete
+find .  -maxdepth 2 -type f -name \*silk\* -size -380c -delete
 
 # Compress Gerbers
 find . -maxdepth 1 -type d -and -not -name '.' -exec zip -r {} {} \; > /dev/null
