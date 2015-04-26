@@ -7,7 +7,7 @@
   ./outline.ngc
   </nc-files>
 
-  <!-- OpenEtherSurge -->
+  <!-- Project -->
   <units v='INCH'/>
 
   <!-- Renderer -->
