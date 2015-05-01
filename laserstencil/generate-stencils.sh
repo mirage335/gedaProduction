@@ -169,6 +169,7 @@ for pcbname in `ls ../.. |sed -n -e '/\.pcb/s/\.pcb$//p'`; do
     
     
         cp millproject $pcbname/
+        cp OpenSCAM_Config $pcbname/
     
     cd $pcbname/
     

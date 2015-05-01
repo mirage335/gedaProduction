@@ -1,0 +1,22 @@
+<openscam>
+  <!-- Note, all values are in mm regardless of 'units' option. -->
+  <!-- NC Files -->
+  <nc-files>
+  ./front.g
+  </nc-files>
+
+  <!-- Project -->
+  <units v='mm'/>
+
+  <!-- Renderer -->
+  <resolution v='0.066306'/>
+
+  <!-- Workpiece -->
+  <automatic-workpiece v='false'/>
+  <workpiece-max v='(100,100,0.25)'/>
+  <workpiece-min v='(175,175,0)'/>
+
+  <tool_table>
+    <tool length='50' number='1' diameter='0.25' shape='CYLINDRICAL' units='mm'/> 
+  </tool_table>
+</openscam>
