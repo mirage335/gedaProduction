@@ -2,7 +2,9 @@
   <!-- Note, all values are in mm regardless of 'units' option. -->
   <!-- NC Files -->
   <nc-files>
-  ./front.g
+  ./front_1.g
+  ./front_2.g
+  ./front_3.g
   </nc-files>
 
   <!-- Project -->
