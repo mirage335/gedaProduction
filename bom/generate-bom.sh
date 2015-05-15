@@ -115,10 +115,14 @@ reportAll() {
 }
 
 mouserReport() {
-	extract_mouserPart "$1" ; echo -n "$2"
-	extract_qty "$1"
-	
-	echo ''
+	if echo "$line" | grep MOUSER > /dev/null
+	then
+		
+		extract_mouserPart "$1" ; echo -n "$2"
+		extract_qty "$1"
+		
+		echo ''
+	fi
 }
 
 writeMouserReport() {
