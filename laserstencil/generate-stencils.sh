@@ -169,7 +169,6 @@ for pcbname in `ls ../.. |sed -n -e '/\.pcb/s/\.pcb$//p'`; do
     
     
         cp millproject $pcbname/
-        cp OpenSCAM_Config $pcbname/
     
     cd $pcbname/
     
@@ -182,8 +181,8 @@ for pcbname in `ls ../.. |sed -n -e '/\.pcb/s/\.pcb$//p'`; do
     ../postprocessor.sh back.ngc 128 240 > back_1.g
     
     #Pass 2
-    ../shrinkPads.sh $pcbname.toppaste.gbr 0.007 > front.gbr
-    ../shrinkPads.sh $pcbname.bottompaste.gbr 0.007 > back.gbr
+    ../shrinkPads.sh $pcbname.toppaste.gbr 0.006 > front.gbr
+    ../shrinkPads.sh $pcbname.bottompaste.gbr 0.006 > back.gbr
     pcb2gcode > /dev/null
     ../postprocessor.sh front.ngc 192 240 > front_2.g
     ../postprocessor.sh back.ngc 192 240 > back_2.g
@@ -193,7 +192,7 @@ for pcbname in `ls ../.. |sed -n -e '/\.pcb/s/\.pcb$//p'`; do
     ../shrinkPads.sh $pcbname.bottompaste.gbr 0.008 > back.gbr
     pcb2gcode > /dev/null
     ../postprocessor.sh front.ngc 255 240 > front_3.g
-    ../postprocessor.sh back.ngc 255 240 > back_3.g
+    ../postprocessor.sh back.ngc 192 240 > back_3.g
     
     #Merge
     cat front_1.g > front.g

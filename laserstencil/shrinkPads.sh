@@ -5,8 +5,18 @@
 resizeDimension="$2"
 
 resizePad() {
-	echo -n $(bc <<< "$1 - $resizeDimension")
+	#Basic operators, for reference.
+	#echo -n $(bc <<< "$1 - $resizeDimension")
 	#echo -n $(bc <<< "$1 * 0.6")
+	
+	newDimension=$(bc <<< "$1 - $resizeDimension")
+	if [[ "$newDimension" < ".004" ]]
+	then
+		echo -n ".004"
+	else
+		echo -n "$newDimension"
+	fi
+	
 }
 
 #Two fields.

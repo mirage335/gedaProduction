@@ -2,23 +2,22 @@
   <!-- Note, all values are in mm regardless of 'units' option. -->
   <!-- NC Files -->
   <nc-files>
-  ./front_1.g
-  ./front_2.g
-  ./front_3.g
+    front.g
   </nc-files>
 
-  <!-- Project -->
-  <units v='mm'/>
+  <!-- Global -->
+  <units v='MM'/>
 
   <!-- Renderer -->
-  <resolution v='0.066306'/>
+  <resolution v='0.075'/>
+  <resolution-mode v='MANUAL'/>
 
   <!-- Workpiece -->
   <automatic-workpiece v='false'/>
-  <workpiece-max v='(100,100,0.25)'/>
-  <workpiece-min v='(175,175,0)'/>
+  <workpiece-max v='(175,150,0.250)'/>
+  <workpiece-min v='(100,100,0)'/>
 
   <tool_table>
-    <tool length='50' number='1' diameter='0.25' shape='CYLINDRICAL' units='mm'/> 
+    <tool length='5' number='1' radius='0.0625' shape='CYLINDRICAL' units='MM'/>
   </tool_table>
 </openscam>

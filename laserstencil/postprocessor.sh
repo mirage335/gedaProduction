@@ -89,6 +89,11 @@ do
 		continue
 	fi
 	
+	if echo $line | grep 'M2 ( Program end. )' > /dev/null
+	then
+		continue
+	fi
+	
 	echo $line
 	
 	
