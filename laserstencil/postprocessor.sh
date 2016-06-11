@@ -94,9 +94,13 @@ do
 		continue
 	fi
 	
+	#Spindle speed can be misinterpred by RepRap firmwares as M0 (stop) command.
+	if echo $line | grep '^S[0-9]*.*' > /dev/null
+	then
+		continue
+	fi
+	
 	echo $line
-	
-	
 	
 done < $1
 

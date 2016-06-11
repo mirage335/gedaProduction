@@ -228,4 +228,4 @@ find . -maxdepth 2 -type f -regextype posix-egrep -regex ".*outline.*" -exec mv 
 #find . -name \*silk\* -size -380c -delete
 
 # Compress Gerbers
-find . -maxdepth 1 -type d -and -not -name '.' -exec zip -r {} {} \; > /dev/null
+#find . -maxdepth 1 -type d -and -not -name '.' -exec zip -r {} {} \; > /dev/null

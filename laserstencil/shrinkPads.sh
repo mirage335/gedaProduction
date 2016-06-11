@@ -10,9 +10,9 @@ resizePad() {
 	#echo -n $(bc <<< "$1 * 0.6")
 	
 	newDimension=$(bc <<< "$1 - $resizeDimension")
-	if [[ "$newDimension" < ".004" ]]
+	if [[ "$newDimension" < ".003" ]]
 	then
-		echo -n ".004"
+		echo -n ".003"
 	else
 		echo -n "$newDimension"
 	fi
