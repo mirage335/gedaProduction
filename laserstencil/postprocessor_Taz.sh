@@ -13,7 +13,7 @@ convertUnits() {
 	echo -n $(bc <<< "$1 * 25.4 + $offset")
 }
 
-echo "M106 P1 S255 (Fan on.)"
+echo "M106 S255 (Fan on.)"
 
 #For best results, home the machine, send it to the offset point, and THEN start the job. That will keep the laser from bumping around unnecessarily.
 #echo "g0 z5 (Keep laser high until starting point is reached, in case the table is imperfect.)"
@@ -65,7 +65,7 @@ do
 	then
 		echo "M400"
 		echo "M5"
-		echo "M98 P/macros/lb_off"
+		echo "M42 P13 S0 (OFF - LASER)"
 		echo $line
 		continue
 	fi
@@ -75,7 +75,7 @@ do
 		echo $line
 		echo "M400"
 		echo "M3"
-		echo "M98 P/macros/la_on"
+		echo "M42 P13 S$power (ON - LASER)"
 		continue
 	fi
 	
@@ -104,4 +104,4 @@ do
 	
 done < $1
 
-echo "M106 P1 S0 (Fan off.)"
+echo "M106 S0 (Fan off.)"
