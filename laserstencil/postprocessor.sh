@@ -8,7 +8,7 @@ feedrate="$3"
 rapidFeedRate=2000
 
 convertUnits() {
-	offset=100
+	offset=0
 	
 	echo -n $(bc <<< "$1 * 25.4 + $offset")
 }
