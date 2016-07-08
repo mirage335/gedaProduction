@@ -8,7 +8,7 @@ fill-outline = yes
 outline-width = 0.0001	#laser
 
 # parameters for isolation routing / engraving / etching
-offset=0.002		#laser
+offset=0		#laser
 zwork=0			#laser
 zsafe=0.25		#laser
 mill-feed=2000		#~35mm/sec
