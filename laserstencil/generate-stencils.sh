@@ -174,60 +174,53 @@ for pcbname in `ls ../.. |sed -n -e '/\.pcb/s/\.pcb$//p'`; do
     
     
     #Pass 1
-    ../shrinkPads.sh $pcbname.toppaste.gbr 0.004 > front.gbr
-    ../shrinkPads.sh $pcbname.bottompaste.gbr 0.004 > back.gbr  
+    ../shrinkPads.sh $pcbname.toppaste.gbr 0.008 > front.gbr
+    ../shrinkPads.sh $pcbname.bottompaste.gbr 0.008 > back.gbr  
     pcb2gcode > /dev/null
     ../postprocessor.sh front.ngc 255 120 > front_1.g
     ../postprocessor.sh back.ngc 255 120 > back_1.g
     
     #Pass 2
-    ../shrinkPads.sh $pcbname.toppaste.gbr 0.006 > front.gbr
-    ../shrinkPads.sh $pcbname.bottompaste.gbr 0.006 > back.gbr
+    ../shrinkPads.sh $pcbname.toppaste.gbr 0.010 > front.gbr
+    ../shrinkPads.sh $pcbname.bottompaste.gbr 0.010 > back.gbr
     pcb2gcode > /dev/null
-    ../postprocessor.sh front.ngc 255 10 > front_2.g
-    ../postprocessor.sh back.ngc 255 10 > back_2.g
+    ../postprocessor.sh front.ngc 255 60 > front_2.g
+    ../postprocessor.sh back.ngc 255 60 > back_2.g
     
     #Pass 3
-    ../shrinkPads.sh $pcbname.toppaste.gbr 0.008 > front.gbr
-    ../shrinkPads.sh $pcbname.bottompaste.gbr 0.008 > back.gbr
+    ../shrinkPads.sh $pcbname.toppaste.gbr 0.012 > front.gbr
+    ../shrinkPads.sh $pcbname.bottompaste.gbr 0.012 > back.gbr
     pcb2gcode > /dev/null
     ../postprocessor.sh front.ngc 255 120 > front_3.g
     ../postprocessor.sh back.ngc 255 120 > back_3.g
     
     #Pass 4
-    ../shrinkPads.sh $pcbname.toppaste.gbr 0.010 > front.gbr
-    ../shrinkPads.sh $pcbname.bottompaste.gbr 0.010 > back.gbr
+    ../shrinkPads.sh $pcbname.toppaste.gbr 0.014 > front.gbr
+    ../shrinkPads.sh $pcbname.bottompaste.gbr 0.014 > back.gbr
     pcb2gcode > /dev/null
     ../postprocessor.sh front.ngc 255 120 > front_4.g
     ../postprocessor.sh back.ngc 255 120 > back_4.g
     
     #Pass 5
-    ../shrinkPads.sh $pcbname.toppaste.gbr 0.012 > front.gbr
-    ../shrinkPads.sh $pcbname.bottompaste.gbr 0.012 > back.gbr
+    ../shrinkPads.sh $pcbname.toppaste.gbr 0.016 > front.gbr
+    ../shrinkPads.sh $pcbname.bottompaste.gbr 0.016 > back.gbr
     pcb2gcode > /dev/null
     ../postprocessor.sh front.ngc 255 120 > front_5.g
     ../postprocessor.sh back.ngc 255 120 > back_5.g
     
     #Pass 6
-    ../shrinkPads.sh $pcbname.toppaste.gbr 0.014 > front.gbr
-    ../shrinkPads.sh $pcbname.bottompaste.gbr 0.014 > back.gbr
+    ../shrinkPads.sh $pcbname.toppaste.gbr 0.018 > front.gbr
+    ../shrinkPads.sh $pcbname.bottompaste.gbr 0.018 > back.gbr
     pcb2gcode > /dev/null
     ../postprocessor.sh front.ngc 255 120 > front_6.g
     ../postprocessor.sh back.ngc 255 120 > back_6.g
     
     #Pass 7
-    ../shrinkPads.sh $pcbname.toppaste.gbr 0.016 > front.gbr
-    ../shrinkPads.sh $pcbname.bottompaste.gbr 0.016 > back.gbr
+    ../shrinkPads.sh $pcbname.toppaste.gbr 0.020 > front.gbr
+    ../shrinkPads.sh $pcbname.bottompaste.gbr 0.020 > back.gbr
     pcb2gcode > /dev/null
     ../postprocessor.sh front.ngc 255 120 > front_7.g
     ../postprocessor.sh back.ngc 255 120 > back_7.g
-    
-    #Pass 8
-    ../shrinkPads.sh $pcbname.toppaste.gbr 0.006 > front.gbr
-    ../shrinkPads.sh $pcbname.bottompaste.gbr 0.006 > back.gbr
-    pcb2gcode > /dev/null
-    ../postprocessor.sh front.ngc 255 10 > front_8.g
-    ../postprocessor.sh back.ngc 255 10 > back_8.g
     
     
     #Merge
@@ -238,7 +231,6 @@ for pcbname in `ls ../.. |sed -n -e '/\.pcb/s/\.pcb$//p'`; do
     cat front_5.g >> front.g
     cat front_6.g >> front.g
     cat front_7.g >> front.g
-    cat front_8.g >> front.g
     
     cat back_1.g > back.g
     cat back_2.g >> back.g
@@ -247,7 +239,6 @@ for pcbname in `ls ../.. |sed -n -e '/\.pcb/s/\.pcb$//p'`; do
     cat back_5.g >> back.g
     cat back_6.g >> back.g
     cat back_7.g >> back.g
-    cat back_8.g >> back.g
     
     cd ..
     
