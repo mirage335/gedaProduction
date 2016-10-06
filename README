@@ -1,6 +1,9 @@
 _refreshAll.sh_
 Searches for all production asset generation scripts, and executes them. Note this may be used at a higher-level to refresh multiple gEDA projects at once.
 
+_Assembly_
+Generates all gerbers and machine readable XY/centroid file for assembly services. Off-90deg rotated parts may need to be corrected by manual editing.
+
 _BillOfMaterials_
 Bill of Materials can be generated in HTML format. Use the description attribute for parts, with the following format:
 X $12.34 MOUSER 123-456789
