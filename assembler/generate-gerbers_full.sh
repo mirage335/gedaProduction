@@ -91,6 +91,78 @@ PWD_SanityCheck() {
 
 PWD_SanityCheck generate-gerbers.sh
 
+#"$1" = input sch/pcb file basename
+#"$2" = output filename
+completeBOM() {
+	pcb -x bom --xyfile "$1"_temp.xy "$1".pcb
+	gnetlist -g bom "$1".sch -o "$1"_temp.bom
+	
+	#sed -i 's/,unknown/,/g' "$1"_temp.xy
+	#sed -i 's/	unknown/	/g' "$1"_temp.bom
+	
+	echo '#refdes,footprint,value,description,cost,device,mfr,mfrpn,dst,dstpn,link,link_page,supplier,sbapn,kitting,kitting_d,Xpos,Ypos,rot,side' > "$2"
+	
+	while read centroidLine
+	do
+		if ! echo "$centroidLine" | grep '^[^#\;]' > /dev/null && [[ "$centroidLine" != "" ]]
+		then
+			continue
+		fi
+		
+		refdes=$(echo "$centroidLine" | cut -d ',' -f1)
+		footprint=$(echo "$centroidLine" | cut -d ',' -f2)
+		value=$(echo "$centroidLine" | cut -d ',' -f3)
+		Xpos=$(echo "$centroidLine" | cut -d ',' -f4)
+		Ypos=$(echo "$centroidLine" | cut -d ',' -f5)
+		rot=$(echo "$centroidLine" | cut -d ',' -f6)
+		side=$(echo "$centroidLine" | cut -d ',' -f7)
+		
+		while read bomLine
+		do
+			
+			if ! echo "$bomLine" | cut -f1 | grep "$refdes" > /dev/null
+			then
+				continue
+			fi
+			
+			description=$(echo "$bomLine" | cut -f4)
+			
+			cost=$(echo "$bomLine" | cut -f5)
+			
+			device=$(echo "$bomLine" | cut -f6)
+			mfr=$(echo "$bomLine" | cut -f7)
+			mfrpn=$(echo "$bomLine" | cut -f8)
+			dst=$(echo "$bomLine" | cut -f9)
+			dstpn=$(echo "$bomLine" | cut -f10)
+			link=$(echo "$bomLine" | cut -f11)
+			link_page=$(echo "$bomLine" | cut -f12)
+			
+			supplier=$(echo "$bomLine" | cut -f13)
+			sbapn=$(echo "$bomLine" | cut -f14)
+			kitting=$(echo "$bomLine" | cut -f15)
+			kitting_d=$(echo "$bomLine" | cut -f16)
+			
+			nobom=$(echo "$bomLine" | cut -f17)
+			noplace=$(echo "$bomLine" | cut -f18)
+			
+			
+		done < "$1"_temp.bom
+		
+		if [[ $noplace != "true" ]]
+		then
+			echo "$refdes,$footprint,$value,$description,$cost,$device,$mfr,$mfrpn,$dst,$dstpn,$link,$link_page,$supplier,$sbapn,$kitting,$kitting_d,$Xpos,$Ypos,$rot,$side" >> "$2"
+		fi
+		
+		unset refdes footprint value description cost device mfr mfrpn dst dstpn link link_page supplier sbapn kitting kitting_d Xpos Ypos rot side
+		
+		
+	done < "$1"_temp.xy
+
+	rm "$1"_temp.xy "$1"_temp.bom
+	
+	sed -i 's/,unknown/,/g' "$2"
+}
+
 ## Variables
 MAX_LAYERS=4 # Currently OSHPark maxes out at 4 layer boards, we'll
 	     # emit a warning if this is exceeded
@@ -121,11 +193,10 @@ for pcbname in `ls ../.. |sed -n -e '/\.pcb/s/\.pcb$//p'`; do
     if [[ ! -e $pcbname ]]; then
 	mkdir $pcbname
     fi
+    
     pcb -x gerber --all-layers --name-style fixed --gerberfile $pcbname/$pcbname ../../$pcbname.pcb
     
-    pcb -x bom --xyfile $pcbname/$pcbname.xy ../../$pcbname.pcb
-    
-    gnetlist -g bom ../../$pcbname.sch -o $pcbname/$pcbname.bom
+    completeBOM ../../$pcbname $pcbname/$pcbname.xy
     
     #Optional GERBV project.
     cp ./gerberProjectTemplate ./$pcbname"_project.gvp"
