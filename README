@@ -4,6 +4,8 @@ Searches for all production asset generation scripts, and executes them. Note th
 _Assembly_
 Generates all gerbers and machine readable XY/centroid file for assembly services. Off-90deg rotated parts may need to be corrected by manual editing.
 
+Use the generate-gerbers_full script to generate more detailed files for actual manufacturing, though this will be more difficult to render accurately in gerbv for evaluation. 
+
 _BillOfMaterials_
 Bill of Materials can be generated in HTML format. Use the description attribute for parts, with the following format:
 X $12.34 MOUSER 123-456789
